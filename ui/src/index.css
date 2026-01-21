@@ -1,0 +1,183 @@
+/**
+ * Global styles
+ * Tailwind CSS with custom properties
+ */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Root variables */
+:root {
+  --color-primary: #2b2d42;
+  --color-secondary: #8d99ae;
+  --color-background: #edf2f4;
+  --color-danger: #ef233c;
+  --color-critical: #d90429;
+  
+  --radius: 12px;
+  --shadow-soft: 0 2px 8px rgba(11, 15, 30, 0.08);
+  --shadow-medium: 0 4px 16px rgba(11, 15, 30, 0.12);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0b0f1e;
+  }
+}
+
+/* Base styles */
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-platinum-50 text-space-900 font-sans;
+  }
+
+  h1 {
+    @apply text-4xl font-bold;
+  }
+
+  h2 {
+    @apply text-2xl font-bold;
+  }
+
+  h3 {
+    @apply text-xl font-semibold;
+  }
+
+  button {
+    @apply transition-colors;
+  }
+
+  /* Accessibility - Focus visible */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-space-600;
+  }
+
+  /* Dark mode support */
+  .dark {
+    @apply bg-space-900 text-platinum-100;
+  }
+}
+
+/* Component styles */
+@layer components {
+  .card {
+    @apply bg-white rounded-lg shadow-soft border border-lavender-100 p-6;
+  }
+
+  .card.dark {
+    @apply bg-space-800 border-space-700;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-space-600 text-white rounded-base hover:bg-space-700 focus:ring-2 focus:ring-space-600 focus:ring-offset-2 transition-colors;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 bg-strawberry-500 text-white rounded-base hover:bg-strawberry-600 focus:ring-2 focus:ring-strawberry-500 focus:ring-offset-2 transition-colors;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 border border-lavender-300 rounded-base focus:ring-2 focus:ring-space-600 focus:border-transparent transition-colors;
+  }
+
+  .table-row-hover {
+    @apply hover:bg-platinum-50 transition-colors;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.2s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.2s ease-out;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bcc4d1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8d99ae;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: #4a5675;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #616d88;
+}
+
+/* Print styles */
+@media print {
+  @page {
+    margin: 1in;
+  }
+
+  body {
+    @apply bg-white;
+  }
+
+  .no-print {
+    @apply hidden;
+  }
+}

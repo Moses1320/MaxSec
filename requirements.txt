@@ -1,0 +1,48 @@
+# MaxSec Core Dependencies
+# Production-grade system monitoring and threat detection
+
+# Core monitoring & system utilities
+psutil>=5.9.0
+wmi>=1.5.1; sys_platform == 'win32'
+
+# Async & networking
+aiohttp>=3.8.0
+asyncio-contextmanager>=1.0.0
+grpcio>=1.50.0
+grpcio-tools>=1.50.0
+
+# Database
+sqlalchemy>=2.0.0
+alembic>=1.10.0
+
+# Data processing & ML (optional)
+numpy>=1.23.0
+pandas>=1.5.0
+scikit-learn>=1.1.0
+tensorflow-lite>=2.11.0; sys_platform != 'win32'
+
+# Security & cryptography
+cryptography>=38.0.0
+pycryptodome>=3.15.0
+
+# Configuration & serialization
+pyyaml>=6.0
+pydantic>=1.10.0
+msgpack>=1.0.0
+
+# Logging & observability
+python-json-logger>=2.0.0
+opentelemetry-api>=1.15.0
+opentelemetry-sdk>=1.15.0
+opentelemetry-exporter-prometheus>=0.36b0
+
+# Testing (optional)
+pytest>=7.2.0
+pytest-asyncio>=0.20.0
+pytest-cov>=4.0.0
+
+# Development tools
+black>=22.10.0
+flake8>=5.0.0
+mypy>=0.990
+bandit>=1.7.4

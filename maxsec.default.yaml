@@ -1,0 +1,92 @@
+"""
+MaxSec Configuration Schema
+YAML-based policy and settings configuration
+"""
+
+# Default mode: monitor (safe default)
+mode: "monitor"  # Options: monitor, enforce, lockdown
+
+# System monitoring settings
+monitoring:
+  process_enumeration_interval: 5  # seconds
+  enable_hash_computation: true
+  enable_network_tracking: true
+  enable_permission_tracking: true
+  
+# Risk scoring configuration
+risk_scoring:
+  permission_abuse_weight: 0.25
+  hidden_execution_weight: 0.20
+  network_anomalies_weight: 0.20
+  persistence_behavior_weight: 0.15
+  resource_spikes_weight: 0.10
+  masquerading_risk_weight: 0.10
+  
+  # Risk level thresholds
+  thresholds:
+    safe_max: 30
+    suspicious_min: 31
+    suspicious_max: 60
+    high_risk_min: 61
+    high_risk_max: 80
+    critical_min: 81
+
+# Alert settings
+alerts:
+  enabled: true
+  min_risk_score: 60
+  enable_desktop_notifications: true
+  enable_email_alerts: false
+  email_recipients: []
+  
+# Enforcement policies
+policies:
+  - name: "Critical Threat Auto-Terminate"
+    trigger_risk_score: 85
+    action: "terminate"
+    reversible: false
+    requires_approval: true
+    
+  - name: "High Risk Quarantine"
+    trigger_risk_score: 70
+    action: "quarantine"
+    reversible: true
+    requires_approval: false
+    
+  - name: "Suspicious Alert"
+    trigger_risk_score: 50
+    action: "suspend"
+    reversible: true
+    requires_approval: false
+
+# Whitelist/Trusted apps
+trusted_apps:
+  - name: "explorer.exe"
+    hash: ""
+    action: "allow"
+    
+  - name: "svchost.exe"
+    hash: ""
+    action: "allow"
+
+# Telemetry settings
+telemetry:
+  enabled: false  # Default: off (user opt-in)
+  collection_interval: 60  # seconds
+  batch_size: 1000
+  encryption: "AES-256"
+  remote_endpoint: null  # Enterprise: https://telemetry.maxsec.io
+  
+# Database settings
+database:
+  path: "./maxsec.db"
+  retention_days: 90
+  auto_cleanup: true
+
+# Logging
+logging:
+  level: "INFO"
+  file: "./maxsec.log"
+  max_size_mb: 100
+  backup_count: 5
+  format: "json"
