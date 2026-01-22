@@ -12,8 +12,8 @@ import {
   X,
   TrendingUp,
 } from "lucide-react";
-import { Button } from "./Button";
-import { RiskBadge } from "./RiskBadge";
+import { Button } from "../atoms/Button";
+import { RiskBadge } from "../atoms/RiskBadge";
 
 interface AlertCardProps {
   id: string;

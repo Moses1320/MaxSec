@@ -14,7 +14,7 @@ import {
   Moon,
   Sun,
 } from "lucide-react";
-import { Dashboard } from "../pages/Dashboard";
+import Dashboard from "./pages/Dashboard";
 
 export const Layout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);

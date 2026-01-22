@@ -29,10 +29,10 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import { Button } from "../atoms/Button";
-import { RiskBadge } from "../atoms/RiskBadge";
-import { AlertCard } from "../molecules/AlertCard";
-import { ProcessTable } from "../organisms/ProcessTable";
+import { Button } from "../components/atoms/Button";
+import { RiskBadge } from "../components/atoms/RiskBadge";
+import { AlertCard } from "../components/molecules/AlertCard";
+import { ProcessTable } from "../components/organisms/ProcessTable";
 
 // Sample data - replace with real backend data
 const mockRiskTrend = [
@@ -112,7 +112,7 @@ interface KPICard {
   color: string;
 }
 
-export const Dashboard: React.FC = () => {
+const Dashboard: React.FC = () => {
   const [systemStatus, setSystemStatus] = useState("monitoring");
   const [showAlerts, setShowAlerts] = useState(true);
   const [selectedAlert, setSelectedAlert] = useState<string | null>(null);
@@ -302,3 +302,5 @@ export const Dashboard: React.FC = () => {
     </main>
   );
 };
+
+export default Dashboard;
