@@ -14,11 +14,16 @@ import {
   Moon,
   Sun,
 } from "lucide-react";
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import Incidents from "./pages/Incidents";
+import Policies from "./pages/Policies";
+import SettingsPage from "./pages/Settings";
 
 export const Layout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [currentPage, setCurrentPage] = useState("Home");
 
   const navigationItems = [
     {
@@ -55,24 +60,29 @@ export const Layout: React.FC = () => {
         } bg-space-600 text-white transition-all duration-300 overflow-hidden flex flex-col`}
         aria-label="Main navigation"
       >
-        {/* Logo */}
-        <div className="p-4 flex items-center gap-3 border-b border-space-700">
+        {/* Logo - Clickable to go to Home */}
+        <button
+          onClick={() => setCurrentPage("Home")}
+          className="p-4 flex items-center gap-3 border-b border-space-700 hover:bg-space-500 transition-colors focus:outline-none focus:ring-2 focus:ring-strawberry-500 focus:ring-offset-2 focus:ring-offset-space-600"
+          title="Go to Home"
+          aria-label="MaxSec Home"
+        >
           <Shield size={24} className="flex-shrink-0" />
           {sidebarOpen && (
             <h2 className="font-bold text-lg whitespace-nowrap">MaxSec</h2>
           )}
-        </div>
+        </button>
 
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-2">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             return (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                  item.name === "Dashboard"
+                onClick={() => setCurrentPage(item.name)}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                  item.name === currentPage
                     ? "bg-space-500 text-white"
                     : "text-lavender-200 hover:bg-space-500"
                 } focus:outline-none focus:ring-2 focus:ring-strawberry-500 focus:ring-offset-2 focus:ring-offset-space-600`}
@@ -80,7 +90,7 @@ export const Layout: React.FC = () => {
               >
                 <Icon size={20} className="flex-shrink-0" />
                 {sidebarOpen && <span>{item.name}</span>}
-              </a>
+              </button>
             );
           })}
         </nav>
@@ -132,7 +142,11 @@ export const Layout: React.FC = () => {
         </header>
 
         {/* Page Content */}
-        <Dashboard />
+        {currentPage === "Home" && <Home />}
+        {currentPage === "Dashboard" && <Dashboard />}
+        {currentPage === "Incidents" && <Incidents />}
+        {currentPage === "Policies" && <Policies />}
+        {currentPage === "Settings" && <SettingsPage />}
       </div>
 
       {/* Keyboard Shortcuts Help */}

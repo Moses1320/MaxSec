@@ -113,7 +113,7 @@ interface KPICard {
 }
 
 const Dashboard: React.FC = () => {
-  const [systemStatus, setSystemStatus] = useState("monitoring");
+  const [systemStatus, setSystemStatus] = useState<"monitoring" | "paused">("monitoring");
   const [showAlerts, setShowAlerts] = useState(true);
   const [selectedAlert, setSelectedAlert] = useState<string | null>(null);
 
@@ -164,11 +164,11 @@ const Dashboard: React.FC = () => {
           </div>
           <div className="flex gap-2">
             <Button
-              variant="secondary"
-              onClick={() => setSystemStatus("monitoring")}
+              variant={systemStatus === "monitoring" ? "primary" : "secondary"}
+              onClick={() => setSystemStatus(systemStatus === "monitoring" ? "paused" : "monitoring")}
             >
               <Eye size={16} />
-              {systemStatus === "monitoring" ? "Monitor Mode" : "Switch"}
+              {systemStatus === "monitoring" ? "Monitoring Active" : "Monitoring Paused"}
             </Button>
           </div>
         </div>
